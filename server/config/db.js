@@ -3,6 +3,13 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
+// Log database configuration status (for debugging)
+console.log('Database Configuration Check:');
+console.log('DB_HOST:', process.env.MYSQL_HOST || process.env.DB_HOST ? '(Set)' : '(Missing)');
+console.log('DB_USER:', process.env.MYSQL_USER || process.env.DB_USER ? '(Set)' : '(Missing)');
+console.log('DB_PASS:', process.env.MYSQL_PASSWORD || process.env.DB_PASS ? '(Set)' : '(Missing)');
+console.log('DB_NAME:', process.env.MYSQL_DATABASE || process.env.DB_NAME ? '(Set)' : '(Missing)');
+
 const sequelize = new Sequelize(
   process.env.MYSQL_DATABASE || process.env.DB_NAME,
   process.env.MYSQL_USER || process.env.DB_USER,
