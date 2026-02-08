@@ -12,10 +12,10 @@ const __dirname = path.dirname(__filename)
 async function initDB() {
   try {
     const connection = await mysql.createConnection({
-      host: process.env.DB_HOST,
-      port: process.env.DB_PORT,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASS,
+      host: process.env.MYSQL_HOST || process.env.DB_HOST,
+      port: process.env.MYSQL_PORT || process.env.DB_PORT,
+      user: process.env.MYSQL_USER || process.env.DB_USER,
+      password: process.env.MYSQL_PASSWORD || process.env.DB_PASS,
       multipleStatements: true
     })
 
