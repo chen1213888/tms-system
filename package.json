@@ -2,11 +2,11 @@
   "name": "house-root",
   "private": true,
   "scripts": {
-    "install:all": "npm install --prefix client --include=dev && npm install --prefix server",
+    "install:all": "npm install --prefix client --production=false && npm install --prefix server",
     "dev:client": "npm run dev --prefix client",
     "dev:server": "npm run dev --prefix server",
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
-    "build": "npm run build --prefix client",
+    "build": "npm run install:all && npm run build --prefix client",
     "start": "NODE_ENV=production npm start --prefix server",
     "init-db": "npm run init-db --prefix server",
     "seed": "npm run seed --prefix server"
