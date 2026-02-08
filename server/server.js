@@ -8,8 +8,9 @@ import app from './app.js';
  */
 const PORT = process.env.PORT || 3001;
 
-const server = app.listen(PORT, () => {
+const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server ready on port ${PORT}`);
+  console.log(`Environment: ${process.env.NODE_ENV}`);
 });
 
 /**

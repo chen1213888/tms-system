@@ -62,7 +62,7 @@ router.post('/login', async (req, res) => {
     })
   } catch (error) {
     console.error('Login Error:', error)
-    res.status(500).json({ code: 500, message: '服务器内部错误' })
+    res.status(500).json({ code: 500, message: '服务器内部错误: ' + error.message })
   }
 })
 

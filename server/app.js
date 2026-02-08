@@ -34,7 +34,7 @@ const app = express()
 
 // Debug middleware
 app.use((req, res, next) => {
-  console.log(`[Request] ${req.method} ${req.url}`)
+  console.log(`[Request] ${req.method} ${req.url} - IP: ${req.ip} - Headers: ${JSON.stringify(req.headers)}`)
   next()
 })
 
@@ -84,13 +84,27 @@ app.use(
 /**
  * Static files for frontend
  */
+import fs from 'fs'
+
+// ...
+
 if (process.env.NODE_ENV === 'production') {
   const clientDistPath = path.join(__dirname, '../client/dist')
+  console.log('Client dist path:', clientDistPath)
+  try {
+    console.log('Dist files:', fs.readdirSync(clientDistPath))
+  } catch (e) {
+    console.error('Failed to read dist directory:', e.message)
+  }
+
   app.use(express.static(clientDistPath))
-  app.get('*', (req, res) => {
-    if (!req.path.startsWith('/api')) {
-      res.sendFile(path.join(clientDistPath, 'index.html'))
+  // ...确保 API 请求不会被通配符路由捕获
+  app.get('*', (req, res, next) => {
+    // 如果是 /api 开头的请求，调用 next() 交给后面的 404 处理
+    if (req.path.startsWith('/api')) {
+       return next()
     }
+    res.sendFile(path.join(clientDistPath, 'index.html'))
   })
 }
 

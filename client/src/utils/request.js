@@ -4,7 +4,7 @@ import store from '@/store'
 import router from '@/router'
 
 const service = axios.create({
-  baseURL: '/api', // Proxy handles this
+  baseURL: import.meta.env.VITE_API_BASE_URL || '/api',
   timeout: 5000
 })
 

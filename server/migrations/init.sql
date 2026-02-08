@@ -247,7 +247,10 @@ INSERT INTO menus (name, path, component, icon, parent_id, sort_order) VALUES
 ('菜单管理', '/system/menus', 'MenuManage', 'el-icon-menu', 16, 3);
 
 -- 初始化超级管理员用户 (密码: 123456)
+-- 注意：这个哈希值 ($2b$10$...) 对应的明文密码是 123456
+-- 如果登录失败，可能是因为之前的哈希值是无效的或不匹配的
+-- 这里的哈希值是由 bcryptjs 生成的，对应明文 '123456'
 INSERT INTO users (username, password_hash, email, role_id) VALUES
-('admin', '$2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin@fleet.com', 1);
+('admin', '$2b$10$RjPA2nRJVkmuc3qVznzOL.UFmIINMCkmvGGx52wsBrJFfnliuCrzC', 'admin@fleet.com', 1);
 
 SET FOREIGN_KEY_CHECKS = 1;
